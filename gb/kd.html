@@ -85,7 +85,7 @@
                     var i = 1;
                     while(i != 11){
                        if (kdpb + i == 101) break;
-                       var diffkdprev = result(k, d, kdpb + i);
+                       var diffkdprev = ramalan(k, d, kdpb + i);
                        result+="<li style='color:#0E3460'>Kill/Death Jadi ";
                        result+=(kdpb+i);
                        result+="% : Dengan Tambah Kill : ";
@@ -107,9 +107,8 @@
                 }
             }
             
-            
             function ramalan(k, d, kdprev){
-
+                
                 var kd = Math.round((k/(k+d))*100);
                 var i = k+1;
                 while(kd != kdprev){
