@@ -136,7 +136,7 @@ $(document).ready(function () {
         ucapanSalam = "Good Morning Sarah"
         kata1 = "Jangan lupa sarapan";
         kata2 = "Semangat Ya Sekolah Daring-nya";
-        kata3 = "Semoga hari mu menyenangkan";
+        kata3 = "Semoga harimu menyenangkan";
       } else {
         if (hSalam < 15) {
           ucapanSalam = "Selamat Siang Sarah"
