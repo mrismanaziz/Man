@@ -161,7 +161,7 @@ $(document).ready(function () {
       strings: [ucapanSalam, kata1, kata2, kata3],
       smartBackspace: true,
       showCursor: 0,
-      typeSpeed: 50,
+      typeSpeed: 100,
     });
   }
 
