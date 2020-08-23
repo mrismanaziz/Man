@@ -129,33 +129,36 @@ $(document).ready(function () {
     if (hSalam < 4) {
       ucapanSalam = "Good Night Sarah"
       kata1 = "Jangan tidur malam";
-      kata2 = "Semoga mimpi indah";
+      kata2 = "";
+      kata3 = "Semoga mimpi indah";
     } else {
       if (hSalam < 11) {
         ucapanSalam = "Good Morning Sarah"
         kata1 = "Jangan lupa sarapan";
-        kata2 = "Semoga hari hari mu menyenangkan";
+        kata2 = "Semangat Ya Sekolah Daring-nya";
+        kata3 = "Semoga hari mu menyenangkan";
       } else {
-        if (hSalam < 16) {
+        if (hSalam < 15) {
           ucapanSalam = "Selamat Siang Sarah"
           kata1 = "Jangan lupa makan siang";
           kata2 = "Jangan lupa shalat dzuhur yaa";
         } else {
-          if (hSalam < 20) {
+          if (hSalam < 18) {
             ucapanSalam = "Selamat Sore Sarah"
             kata1 = "Jangan lupa mandi hahaha";
             kata2 = "Jangan lupa shalat ashar yaa";
           } else {
               ucapanSalam = "Good Night Sarah"
               kata1 = "Jangan tidur malam";
-              kata2 = "Semoga mimpi indah";
+              kata2 = "";
+              kata3 = "Semoga mimpi indah";
           }
         }
       }
     }
     // $(".salam").html(ucapanSalam);
     var typed = new Typed('h2', {
-      strings: [ucapanSalam, kata1, kata2],
+      strings: [ucapanSalam, kata1, kata2, kata3],
       smartBackspace: true,
       showCursor: 0,
       typeSpeed: 50,
