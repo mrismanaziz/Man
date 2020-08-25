@@ -141,12 +141,14 @@ $(document).ready(function () {
         if (hSalam < 15) {
           ucapanSalam = "Selamat Siang Sarah"
           kata1 = "Jangan lupa makan siang";
-          kata2 = "Jangan lupa shalat dzuhur yaa";
+          kata2 = "";
+          kata3 = "Jangan lupa shalat dzuhur yaa";
         } else {
           if (hSalam < 18) {
             ucapanSalam = "Selamat Sore Sarah"
             kata1 = "Jangan lupa mandi hahaha";
-            kata2 = "Jangan lupa shalat ashar yaa";
+            kata2 = "";
+            kata3 = "Jangan lupa shalat ashar yaa";
           } else {
               ucapanSalam = "Good Night Sarah"
               kata1 = "Jangan tidur malam";
