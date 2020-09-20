@@ -1,0 +1,146 @@
+<!--
+    @Author     : Muhamad Risman Aziz
+    @Github     : https://github.com/mrismanaziz
+    @Facebook   : https://facebook.com/pwn.id
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Kalkulator KD Point Blank</title>
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Share+Tech+Mono">
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Verdana">
+    <style type='text/css'>
+    @import url(https://fonts.googleapis.com/css?family=Share+Tech+Mono|Verdana);
+    html {
+    font-family: 'Share Tech Mono';
+    }
+    input[type="text"],
+    textarea {
+    padding: 5px;
+    width: 95%;
+    background: #efefef;
+    border: 1px solid;
+    font-size: 10pt;
+    margin: 6px 0px;
+    }
+    select {
+    background: #efefef;
+    padding: 3px;
+    padding-left: 5px;
+    font-family: 'Share Tech Mono';
+    font-size: 13px;
+    }
+    </style>
+    </head>
+    <center><br />
+        <header class="entry-header">
+			<h1 class="entry-title">Kalkulator Kill Death - Point Blank</h1>
+    	</header>
+				<div class="entry-content">
+                
+    <div style="text-align: center; margin: 10px -10px;">
+            <!-- /13837015/CW_desktop_sup --></p>
+        <div id='div-gpt-ad-1446806101390-5'>
+            <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1446806101390-5'); });
+            </script>
+        </div>
+    </div>
+</div>
+    <div style="margin:10px;"></div>
+        <script type="text/javascript">
+            function ngitungKD(){
+
+                var k = parseInt(document.getElementById('txtK').value, 10);
+                var d = parseInt(document.getElementById('txtD').value, 10);
+                var out = document.getElementById('out');                
+                var result = '';     
+                
+                if (isNaN(k)){
+                    alert ("Nilai Kill Tidak Valid");
+                    return;
+                }
+                                               
+                if (isNaN(d)){
+                    alert ("Nilai Death Tidak Valid");
+                    return;
+                }       
+                                
+                
+                if (k>0){
+                if (d>=0){                                    
+                    var kd = (k/(k+d))*100;
+                    var kdpb = Math.round(kd);
+
+                    result+="<p style='color:#0E3460;font-weight: bold;'>Kill/Death PB : ";
+                    result+=kdpb;
+                    result+="%</p>";
+
+                    result+="<p>Nilai % yang Tepat : ";
+                    result+=kd;
+                    result+="</p>";
+
+                    result+="<p style='color:#0E3460'>Ramalan :";
+                    result+="<ol style='color:#0E3460'>";
+                    var i = 1;
+                    while(i != 11){
+                       if (kdpb + i == 101) break;
+                       var diffkdprev = ramalan(k, d, kdpb + i);
+                       result+="<li style='color:#0E3460'>Kill/Death Jadi ";
+                       result+=(kdpb+i);
+                       result+="% : Dengan Tambah Kill : ";
+                       result+=diffkdprev;  
+                       result+= "</li>";
+                       i++;
+                    }
+
+                    result+="</ol></p>";
+
+                    out.innerHTML = result;
+                }else{
+                    alert ("Nilai untuk Death tidak valid");
+                    return;
+                }
+                }else{
+                    alert ("Nilai untuk Kill tidak valid");
+                    return;
+                }
+            }
+            
+            function ramalan(k, d, kdprev){
+                
+                var kd = Math.round((k/(k+d))*100);
+                var i = k+1;
+                while(kd != kdprev){
+                   kd = Math.round((i/(i+d))*100);
+                   i++;
+                }
+                return (i-1-k);
+            }
+        </script>
+	<center>
+	<div class="well well-large">
+        <fieldset style='width: 300px;'>
+                <legend>Kill/Death</legend>
+            <table>
+                <tr>
+                    <td>Kill  &nbsp;: </td>
+                    <td><input id='txtK' type='text'/></td>
+                </tr>
+                <tr>
+                    <td>Death : </td>
+                   <td><input id='txtD' type='text'/></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td style='text-align: right'><input style="border: 1px solid black; border-radius: .25rem;   padding: 5px 15px 5px 20px;" onclick='ngitungKD()' type='button' value='Hitung'/></td>
+                </tr>
+            </table>
+        </fieldset>
+        <br/>
+        <fieldset style='width: 600px'>
+            <legend>Result</legend>
+            <div id='out' style='font-family: verdana'></div>
+        </fieldset>
+    </div>				
+</html>
