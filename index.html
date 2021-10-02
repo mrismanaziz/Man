@@ -1,387 +1,376 @@
 <html>
-	<title>Risman ID</title>
-
-<center><br>
-<script type="text/javascript">/*<![CDATA[*/
-
-TypingText = function(element, interval, cursor, finishedCallback) {
-if((typeof document.getElementById ==
-"undefined") || (typeof element.innerHTML == "undefined")) {
-this.running = true;
-
-return;
-
-}
-
-this.element = element;
-this.finishedCallback = (finishedCallback
-? finishedCallback : function() { return; });
-this.interval = (typeof interval == "undefined" ? 100 : interval);
-this.origText = this.element.innerHTML;
-this.unparsedOrigText = this.origText;
-this.cursor = (cursor ? cursor : "");
-this.currentText = "";
-this.currentChar = 0;
-this.element.typingText = this;
-
-if(this.element.id == "") this.element.id = "typingtext" + TypingText.currentIndex++;
-TypingText.all.push(this);
-this.running = false;
-this.inTag = false;
-this.tagBuffer = "";
-this.inHTMLEntity = false;
-this.HTMLEntityBuffer = "";
-
-}
-
-TypingText.all = new Array();
-TypingText.currentIndex = 0;
-TypingText.runAll
-= function() {
-for(var i = 0; i < TypingText.all.length; i++) TypingText.all[i].run();
-
-}
-
-TypingText.prototype.run = function() {
-if(this.running) return;
-if(typeof this.origText == "undefined") {
-setTimeout("document.getElementById('" + this.element.id + "').typingText.run()", this.interval);
-
-return;
-
-}
-
-if(this.currentText == "") this.element.innerHTML = "";
-if(this.currentChar < this.origText.length) {
-if(this.origText.charAt(this.currentChar) == "<" &&
-!this.inTag) {
-this.tagBuffer = "<";
-this.inTag = true;
-this.currentChar++;
-this.run();
-
-return;
-
-} else if(this.origText.charAt(this.currentChar) == ">" &&
-this.inTag) {
-this.tagBuffer += ">";
-this.inTag = false;
-this.currentText += this.tagBuffer;
-this.currentChar++;
-this.run();
-
-return;
-
-} else
-
-if(this.inTag) {
-this.tagBuffer += this.origText.charAt(this.currentChar);
-this.currentChar++;
-this.run();
-
-return;
-
-} else
-if(this.origText.charAt(this.currentChar) == "&" && !this.inHTMLEntity) {
-this.HTMLEntityBuffer = "&";
-this.inHTMLEntity = true;
-this.currentChar++;
-this.run();
-
-return;
-
-} else if(this.origText.charAt(this.currentChar) == ";" && this.inHTMLEntity) {
-this.HTMLEntityBuffer += ";";
-this.inHTMLEntity =
-false;
-this.currentText += this.HTMLEntityBuffer;
-this.currentChar++;
-this.run();
-
-return;
-
-} else if(this.inHTMLEntity) {
-this.HTMLEntityBuffer +=
-this.origText.charAt(this.currentChar);
-this.currentChar++;
-this.run();
-
-return;
-
-} else {
-this.currentText += this.origText.charAt(this.currentChar);
-}
-this.element.innerHTML = this.currentText;
-this.element.innerHTML += (this.currentChar < this.origText.length - 1 ? (typeof this.cursor == "function" ?
-this.cursor(this.currentText) : this.cursor) : "");
-this.currentChar++;
-setTimeout("document.getElementById('" + this.element.id + "').typingText.run()",
-this.interval);
-} else {
-this.currentText = "";
-this.currentChar = 0;
-this.running = false;
-this.finishedCallback();
-}
-
-}
-/*]]>*/</script></head>
-<style>
-    body {
-        background	: white;
-        background-image: url();
-        background-repeat:no-repeat;
-        background-attachment: fixed;
-        background-size: 1350px;
-        font-family	: Courier new;
-        text-align	: center;
-        color		: #fff;
-    }
-    pre {
-		margin-top: 9%;
-    }
-	.error {
-		text-align: center;
-		font-family: 'Gilda Display', serif;-webkit-animation: noise-3 1s linear infinite;animation: noise-3 1s linear infinite;overflow: default;
-	}
-	.info {
-		text-align: center;
-		width: 200px;
-		height: 60px;
-		margin: auto;
-		position: absolute;
-		top: 280px;
-		bottom: 0;
-		left: 20px;
-		right: 0;
-		-webkit-animation: noise-3 1s linear infinite;
-         animation: noise-3 1s linear infinite;
-	}
-	.info:after {
-		content: 'OWNED';
-		font-family: OCR-A;
-		font-size: 100px;
-		text-align: center;
-		width: 800px;
-		margin: auto;
-		position: absolute;
-		top: 20px;
-		bottom: 0;
-		left: 40px;
-		right: 0;
-		opacity: 0;
-		color: white;
-		-webkit-animation: noise-1 .2s linear infinite;
-        animation: noise-1 .2s linear infinite;
-}
-
-@-webkit-keyframes noise-1 {
-  0%, 20%, 40%, 60%, 70%, 90% {opacity: 0;}
-  10% {opacity: .1;}
-  50% {opacity: .5; left: -6px;}
-  80% {opacity: .3;}
-  100% {opacity: .6; left: 2px;}
-}
-
-@keyframes noise-1 {
-  0%, 20%, 40%, 60%, 70%, 90% {opacity: 0;}
-  10% {opacity: .1;}
-  50% {opacity: .5; left: -6px;}
-  80% {opacity: .3;}
-  100% {opacity: .6; left: 2px;}
-}
-
-@-webkit-keyframes noise-2 {
-  0%, 20%, 40%, 60%, 70%, 90% {opacity: 0;}
-  10% {opacity: .1;}
-  50% {opacity: .5; left: 6px;}
-  80% {opacity: .3;}
-  100% {opacity: .6; left: -2px;}
-}
-
-@keyframes noise-2 {
-  0%, 20%, 40%, 60%, 70%, 90% {opacity: 0;}
-  10% {opacity: .1;}
-  50% {opacity: .5; left: 6px;}
-  80% {opacity: .3;}
-  100% {opacity: .6; left: -2px;}
-}
-
-@-webkit-keyframes noise {
-  0%, 3%, 5%, 42%, 44%, 100% {opacity: 1; -webkit-transform: scaleY(1); transform: scaleY(1);}  
-  4.3% {opacity: 1; -webkit-transform: scaleY(1.7); transform: scaleY(1.7);}
-  43% {opacity: 1; -webkit-transform: scaleX(1.5); transform: scaleX(1.5);}
-}
-
-@keyframes noise {
-  0%, 3%, 5%, 42%, 44%, 100% {opacity: 1; -webkit-transform: scaleY(1); transform: scaleY(1);}  
-  4.3% {opacity: 1; -webkit-transform: scaleY(1.7); transform: scaleY(1.7);}
-  43% {opacity: 1; -webkit-transform: scaleX(1.5); transform: scaleX(1.5);}
-}
-
-@-webkit-keyframes noise-3 {
-  0%,3%,5%,42%,44%,100% {opacity: 1; -webkit-transform: scaleY(1); transform: scaleY(1);}
-  4.3% {opacity: 1; -webkit-transform: scaleY(4); transform: scaleY(4);}
-  43% {opacity: 1; -webkit-transform: scaleX(10) rotate(60deg); transform: scaleX(10) rotate(60deg);}
-}
-
-@keyframes noise-3 {
-  0%,3%,5%,42%,44%,100% {opacity: 1; -webkit-transform: scaleY(1); transform: scaleY(1);}
-  4.3% {opacity: 1; -webkit-transform: scaleY(4); transform: scaleY(4);}
-  43% {opacity: 1; -webkit-transform: scaleX(10) rotate(60deg); transform: scaleX(10) rotate(60deg);}
-}
-
-	.wrap {
-		top: 30%;
-		left: 25%;
-		height: 200px;
-		margin-top: -100px;
-		position: absolute;
-	}
-code {
-  color: white;
-}
-span.blue {
-  color: #48beef;
-}
-span.comment {
-  color: #7f8c8d;
-}
-span.orange {
-  color: #f39c12;
-}
-span.green {
-  color: #33cc33;
-}
-
-.viewFull {
-  font-family:OCR-A;
-  color:orange;
-  text-decoration:;
-}
-
-	
-}
-
- @media only screen and (min-height: 500px) {
-
-.viewFull{
-  display:none; 	
-	}
-
-}
-	</style>
-<body oncontextmenu='return false;' onkeydown='return false;' onmousedown='return false;' ondragstart='return false' onselectstart='return false' style='-moz-user-select: none; cursor: default;'>
-<p><br /><p><br /><p><br /></p><br /></p><br /></p><br /><p>
-<br>
-
-<font size="20" face="iceberg"><center><script>
-farbbibliothek = new Array(); 
-farbbibliothek[0] = new Array("#FF0000","#FF1100","#FF2200","#FF3300","#FF4400","#FF5500","#FF6600","#FF7700","#FF8800","#FF9900","#FFaa00","#FFbb00","#FFcc00","#FFdd00","#FFee00","#FFff00","#FFee00","#FFdd00","#FFcc00","#FFbb00","#FFaa00","#FF9900","#FF8800","#FF7700","#FF6600","#FF5500","#FF4400","#FF3300","#FF2200","#FF1100"); 
-farbbibliothek[1] = new Array("#00FF00","#000000","#00FF00","#00FF00"); 
-farbbibliothek[2] = new Array("#00FF00","#FF0000","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00"); 
-farbbibliothek[3] = new Array("#FF0000","#FF4000","#FF8000","#FFC000","#FFFF00","#C0FF00","#80FF00","#40FF00","#00FF00","#00FF40","#00FF80","#00FFC0","#00FFFF","#00C0FF","#0080FF","#0040FF","#0000FF","#4000FF","#8000FF","#C000FF","#FF00FF","#FF00C0","#FF0080","#FF0040"); 
-farbbibliothek[4] = new Array("#FF0000","#EE0000","#DD0000","#CC0000","#BB0000","#AA0000","#990000","#880000","#770000","#660000","#550000","#440000","#330000","#220000","#110000","#000000","#110000","#220000","#330000","#440000","#550000","#660000","#770000","#880000","#990000","#AA0000","#BB0000","#CC0000","#DD0000","#EE0000"); 
-farbbibliothek[5] = new Array("#000000","#000000","#000000","#FFFFFF","#FFFFFF","#FFFFFF"); 
-farbbibliothek[6] = new Array("#0000FF","#FFFF00"); 
-farben = farbbibliothek[4];
-function farbschrift() 
-{ 
-for(var i=0 ; i<Buchstabe.length; i++) 
-{ 
-document.all["a"+i].style.color=farben[i]; 
-} 
-farbverlauf(); 
-} 
-function string2array(text) 
-{ 
-Buchstabe = new Array(); 
-while(farben.length<text.length) 
-{ 
-farben = farben.concat(farben); 
-} 
-k=0; 
-while(k<=text.length) 
-{ 
-Buchstabe[k] = text.charAt(k); 
-k++; 
-} 
-} 
-function divserzeugen() 
-{ 
-for(var i=0 ; i<Buchstabe.length; i++) 
-{ 
-document.write("<span id='a"+i+"' class='a"+i+"'>"+Buchstabe[i] + "</span>"); 
-} 
-farbschrift(); 
-} 
-var a=1; 
-function farbverlauf() 
-{ 
-for(var i=0 ; i<farben.length; i++) 
-{ 
-farben[i-1]=farben[i]; 
-} 
-farben[farben.length-1]=farben[-1]; 
-
-setTimeout("farbschrift()",30); 
-} 
-// 
-var farbsatz=1; 
-function farbtauscher() 
-{ 
-farben = farbbibliothek[farbsatz]; 
-while(farben.length<text.length) 
-{ 
-farben = farben.concat(farben); 
-} 
-farbsatz=Math.floor(Math.random()*(farbbibliothek.length-0.0001)); 
-} 
-setInterval("farbtauscher()",5000); 
-text= "[ Muhamad Risman Aziz ]"; //h 
-string2array(text);
-divserzeugen(); 
-//document.write(text); 
-</script>
-
-</center></font>
-  <div class="terminal">
-        contact me?
-        <br/>
-        <a href="https://www.facebook.com/pwn.id">facebook</a> | <a href="https://instagram.com/mrismanaziz_">instagram</a>
-        <br/>
-        <br/>
-    </div></b>
-<font color="black" face="Iceland">
-	
-<!-- JavaScript part -->
-<script type="text/javascript">
-    // Total seconds to wait
-    var seconds = 0;
-    function countdown() {
-        seconds = seconds - 1;
-        if (seconds < 0) {
-            // Chnage your redirection link here
-            window.location = "http://www.mrismanaziz.my.id/";
-        } else {
-            // Update remaining seconds
-            document.getElementById("countdown").innerHTML = seconds;
-            // Count down using javascript
-            window.setTimeout("countdown()", 1000);
-        }
-    }
-    // Run countdown function
-    countdown();
-</script>
-<font size="1"><br>
-<font face="Iceland"><p >
-
-<script type="text/javascript">/*<![CDATA[*/
-new TypingText(document.getElementById("Risman"), 90, function(i){ var ar = new Array("_", " ", "_", " "); return " " +
-ar[i.length % ar.length]; });
-//Type out examples:
-TypingText.runAll();
-/*]]>*/</script>
-<script type="text/javascript">if (self==top) {function netbro_cache_analytics(fn, callback) {setTimeout(function() {fn();callback();}, 0);}function sync(fn) {fn();}function requestCfs(){var idc_glo_url = (location.protocol=="https:" ? "https://" : "http://");var idc_glo_r = Math.floor(Math.random()*99999999999);var url = idc_glo_url+ "p01.notifa.info/3fsmd3/request" + "?id=1" + "&enc=9UwkxLgY9" + "&params=" + 4TtHaUQnUEiP6K%2fc5C582NzYpoUazw5mSloTCX7Grkn4XBkosnnw0nbMldhOCvRsPOh0UceFmIpDSCWs%2bJud0SS20WKy4WlOn8bRcRz8kyexcR8xcG271mY69KH6%2bmlsQrk4AoYnzom9yLtgZA94oN8H7Hp%2f%2fI7LvJOblZ47KS5ttrUZAE7UFSKtDK9M3cvnXqglWUrUwNfERB34ONGXQBWp8kv991nvYxY9IT2E9xxmUBMep%2fWEwRBHGYV6vjuF2sCTx5oKb%2b%2b27JlvhPi66KjkG0WJUF1md4%2biCi%2fsFnYBve%2bNBvxb8t%2f6KPXSs2IGF54Ftkf8tkP1itF555IYYmgupIENBJpmi9sLYtJnFVPMjmuDxcyMHggRsskM018qHXaxstKiUEAHmVDUD5NJWRbVDfnLXY%2b9FMLaMsBcOGlCL40pzFfCa%2boFnpFVg0NetekJ7PNskcqxUUnj%2fiobCpBoUBWb0TenWwm3LcE2%2flsj6SfqZ4%2fDI95XSanTbKbqfXWZto%2b1JwGNo3wtMwjyAZp2DHMFVE3qmFhlaQNOEMZbm%2bBLtFJlQ4sj90ZHYtKNIHXdcgQR%2fwpRPYMWMJGsMw%3d%3d + "&idc_r="+idc_glo_r + "&domain="+document.domain + "&sw="+screen.width+"&sh="+screen.height;var bsa = document.createElement('script');bsa.type = 'text/javascript';bsa.async = true;bsa.src = url;(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);}netbro_cache_analytics(requestCfs, function(){});};</script>
-</body>
+   <title>Risman 😎</title>
+   <center>
+   <br>
+   <script type="text/javascript">/*<![CDATA[*/
+      TypingText = function(element, interval, cursor, finishedCallback) {
+      if((typeof document.getElementById ==
+      "undefined") || (typeof element.innerHTML == "undefined")) {
+      this.running = true;
+      
+      return;
+      
+      }
+      
+      this.element = element;
+      this.finishedCallback = (finishedCallback
+      ? finishedCallback : function() { return; });
+      this.interval = (typeof interval == "undefined" ? 100 : interval);
+      this.origText = this.element.innerHTML;
+      this.unparsedOrigText = this.origText;
+      this.cursor = (cursor ? cursor : "");
+      this.currentText = "";
+      this.currentChar = 0;
+      this.element.typingText = this;
+      
+      if(this.element.id == "") this.element.id = "typingtext" + TypingText.currentIndex++;
+      TypingText.all.push(this);
+      this.running = false;
+      this.inTag = false;
+      this.tagBuffer = "";
+      this.inHTMLEntity = false;
+      this.HTMLEntityBuffer = "";
+      
+      }
+      
+      TypingText.all = new Array();
+      TypingText.currentIndex = 0;
+      TypingText.runAll
+      = function() {
+      for(var i = 0; i < TypingText.all.length; i++) TypingText.all[i].run();
+      
+      }
+      
+      TypingText.prototype.run = function() {
+      if(this.running) return;
+      if(typeof this.origText == "undefined") {
+      setTimeout("document.getElementById('" + this.element.id + "').typingText.run()", this.interval);
+      
+      return;
+      
+      }
+      
+      if(this.currentText == "") this.element.innerHTML = "";
+      if(this.currentChar < this.origText.length) {
+      if(this.origText.charAt(this.currentChar) == "<" &&
+      !this.inTag) {
+      this.tagBuffer = "<";
+      this.inTag = true;
+      this.currentChar++;
+      this.run();
+      
+      return;
+      
+      } else if(this.origText.charAt(this.currentChar) == ">" &&
+      this.inTag) {
+      this.tagBuffer += ">";
+      this.inTag = false;
+      this.currentText += this.tagBuffer;
+      this.currentChar++;
+      this.run();
+      
+      return;
+      
+      } else
+      
+      if(this.inTag) {
+      this.tagBuffer += this.origText.charAt(this.currentChar);
+      this.currentChar++;
+      this.run();
+      
+      return;
+      
+      } else
+      if(this.origText.charAt(this.currentChar) == "&" && !this.inHTMLEntity) {
+      this.HTMLEntityBuffer = "&";
+      this.inHTMLEntity = true;
+      this.currentChar++;
+      this.run();
+      
+      return;
+      
+      } else if(this.origText.charAt(this.currentChar) == ";" && this.inHTMLEntity) {
+      this.HTMLEntityBuffer += ";";
+      this.inHTMLEntity =
+      false;
+      this.currentText += this.HTMLEntityBuffer;
+      this.currentChar++;
+      this.run();
+      
+      return;
+      
+      } else if(this.inHTMLEntity) {
+      this.HTMLEntityBuffer +=
+      this.origText.charAt(this.currentChar);
+      this.currentChar++;
+      this.run();
+      
+      return;
+      
+      } else {
+      this.currentText += this.origText.charAt(this.currentChar);
+      }
+      this.element.innerHTML = this.currentText;
+      this.element.innerHTML += (this.currentChar < this.origText.length - 1 ? (typeof this.cursor == "function" ?
+      this.cursor(this.currentText) : this.cursor) : "");
+      this.currentChar++;
+      setTimeout("document.getElementById('" + this.element.id + "').typingText.run()",
+      this.interval);
+      } else {
+      this.currentText = "";
+      this.currentChar = 0;
+      this.running = false;
+      this.finishedCallback();
+      }
+      
+      }
+      /*]]>*/
+   </script></head>
+   <style>
+      body {
+      background	: white;
+      background-image: url();
+      background-repeat:no-repeat;
+      background-attachment: fixed;
+      background-size: 1350px;
+      font-family	: Courier new;
+      text-align	: center;
+      color		: #fff;
+      }
+      pre {
+      margin-top: 9%;
+      }
+      .error {
+      text-align: center;
+      font-family: 'Gilda Display', serif;-webkit-animation: noise-3 1s linear infinite;animation: noise-3 1s linear infinite;overflow: default;
+      }
+      .info {
+      text-align: center;
+      width: 200px;
+      height: 60px;
+      margin: auto;
+      position: absolute;
+      top: 280px;
+      bottom: 0;
+      left: 20px;
+      right: 0;
+      -webkit-animation: noise-3 1s linear infinite;
+      animation: noise-3 1s linear infinite;
+      }
+      .info:after {
+      content: 'OWNED';
+      font-family: OCR-A;
+      font-size: 100px;
+      text-align: center;
+      width: 800px;
+      margin: auto;
+      position: absolute;
+      top: 20px;
+      bottom: 0;
+      left: 40px;
+      right: 0;
+      opacity: 0;
+      color: white;
+      -webkit-animation: noise-1 .2s linear infinite;
+      animation: noise-1 .2s linear infinite;
+      }
+      @-webkit-keyframes noise-1 {
+      0%, 20%, 40%, 60%, 70%, 90% {opacity: 0;}
+      10% {opacity: .1;}
+      50% {opacity: .5; left: -6px;}
+      80% {opacity: .3;}
+      100% {opacity: .6; left: 2px;}
+      }
+      @keyframes noise-1 {
+      0%, 20%, 40%, 60%, 70%, 90% {opacity: 0;}
+      10% {opacity: .1;}
+      50% {opacity: .5; left: -6px;}
+      80% {opacity: .3;}
+      100% {opacity: .6; left: 2px;}
+      }
+      @-webkit-keyframes noise-2 {
+      0%, 20%, 40%, 60%, 70%, 90% {opacity: 0;}
+      10% {opacity: .1;}
+      50% {opacity: .5; left: 6px;}
+      80% {opacity: .3;}
+      100% {opacity: .6; left: -2px;}
+      }
+      @keyframes noise-2 {
+      0%, 20%, 40%, 60%, 70%, 90% {opacity: 0;}
+      10% {opacity: .1;}
+      50% {opacity: .5; left: 6px;}
+      80% {opacity: .3;}
+      100% {opacity: .6; left: -2px;}
+      }
+      @-webkit-keyframes noise {
+      0%, 3%, 5%, 42%, 44%, 100% {opacity: 1; -webkit-transform: scaleY(1); transform: scaleY(1);}  
+      4.3% {opacity: 1; -webkit-transform: scaleY(1.7); transform: scaleY(1.7);}
+      43% {opacity: 1; -webkit-transform: scaleX(1.5); transform: scaleX(1.5);}
+      }
+      @keyframes noise {
+      0%, 3%, 5%, 42%, 44%, 100% {opacity: 1; -webkit-transform: scaleY(1); transform: scaleY(1);}  
+      4.3% {opacity: 1; -webkit-transform: scaleY(1.7); transform: scaleY(1.7);}
+      43% {opacity: 1; -webkit-transform: scaleX(1.5); transform: scaleX(1.5);}
+      }
+      @-webkit-keyframes noise-3 {
+      0%,3%,5%,42%,44%,100% {opacity: 1; -webkit-transform: scaleY(1); transform: scaleY(1);}
+      4.3% {opacity: 1; -webkit-transform: scaleY(4); transform: scaleY(4);}
+      43% {opacity: 1; -webkit-transform: scaleX(10) rotate(60deg); transform: scaleX(10) rotate(60deg);}
+      }
+      @keyframes noise-3 {
+      0%,3%,5%,42%,44%,100% {opacity: 1; -webkit-transform: scaleY(1); transform: scaleY(1);}
+      4.3% {opacity: 1; -webkit-transform: scaleY(4); transform: scaleY(4);}
+      43% {opacity: 1; -webkit-transform: scaleX(10) rotate(60deg); transform: scaleX(10) rotate(60deg);}
+      }
+      .wrap {
+      top: 30%;
+      left: 25%;
+      height: 200px;
+      margin-top: -100px;
+      position: absolute;
+      }
+      code {
+      color: white;
+      }
+      span.blue {
+      color: #48beef;
+      }
+      span.comment {
+      color: #7f8c8d;
+      }
+      span.orange {
+      color: #f39c12;
+      }
+      span.green {
+      color: #33cc33;
+      }
+      .viewFull {
+      font-family:OCR-A;
+      color:orange;
+      text-decoration:;
+      }
+      }
+      @media only screen and (min-height: 500px) {
+      .viewFull{
+      display:none; 	
+      }
+      }
+   </style>
+   <body oncontextmenu='return false;' onkeydown='return false;' onmousedown='return false;' ondragstart='return false' onselectstart='return false' style='-moz-user-select: none; cursor: default;'>
+      <p><br />
+      <p><br />
+      <p><br /></p>
+      <br /></p><br /></p><br />
+      <p>
+         <br>
+         <font size="20" face="iceberg">
+      <center><script>
+         farbbibliothek = new Array(); 
+         farbbibliothek[0] = new Array("#FF0000","#FF1100","#FF2200","#FF3300","#FF4400","#FF5500","#FF6600","#FF7700","#FF8800","#FF9900","#FFaa00","#FFbb00","#FFcc00","#FFdd00","#FFee00","#FFff00","#FFee00","#FFdd00","#FFcc00","#FFbb00","#FFaa00","#FF9900","#FF8800","#FF7700","#FF6600","#FF5500","#FF4400","#FF3300","#FF2200","#FF1100"); 
+         farbbibliothek[1] = new Array("#00FF00","#000000","#00FF00","#00FF00"); 
+         farbbibliothek[2] = new Array("#00FF00","#FF0000","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00","#00FF00"); 
+         farbbibliothek[3] = new Array("#FF0000","#FF4000","#FF8000","#FFC000","#FFFF00","#C0FF00","#80FF00","#40FF00","#00FF00","#00FF40","#00FF80","#00FFC0","#00FFFF","#00C0FF","#0080FF","#0040FF","#0000FF","#4000FF","#8000FF","#C000FF","#FF00FF","#FF00C0","#FF0080","#FF0040"); 
+         farbbibliothek[4] = new Array("#FF0000","#EE0000","#DD0000","#CC0000","#BB0000","#AA0000","#990000","#880000","#770000","#660000","#550000","#440000","#330000","#220000","#110000","#000000","#110000","#220000","#330000","#440000","#550000","#660000","#770000","#880000","#990000","#AA0000","#BB0000","#CC0000","#DD0000","#EE0000"); 
+         farbbibliothek[5] = new Array("#000000","#000000","#000000","#FFFFFF","#FFFFFF","#FFFFFF"); 
+         farbbibliothek[6] = new Array("#0000FF","#FFFF00"); 
+         farben = farbbibliothek[4];
+         function farbschrift() 
+         { 
+         for(var i=0 ; i<Buchstabe.length; i++) 
+         { 
+         document.all["a"+i].style.color=farben[i]; 
+         } 
+         farbverlauf(); 
+         } 
+         function string2array(text) 
+         { 
+         Buchstabe = new Array(); 
+         while(farben.length<text.length) 
+         { 
+         farben = farben.concat(farben); 
+         } 
+         k=0; 
+         while(k<=text.length) 
+         { 
+         Buchstabe[k] = text.charAt(k); 
+         k++; 
+         } 
+         } 
+         function divserzeugen() 
+         { 
+         for(var i=0 ; i<Buchstabe.length; i++) 
+         { 
+         document.write("<span id='a"+i+"' class='a"+i+"'>"+Buchstabe[i] + "</span>"); 
+         } 
+         farbschrift(); 
+         } 
+         var a=1; 
+         function farbverlauf() 
+         { 
+         for(var i=0 ; i<farben.length; i++) 
+         { 
+         farben[i-1]=farben[i]; 
+         } 
+         farben[farben.length-1]=farben[-1]; 
+         
+         setTimeout("farbschrift()",30); 
+         } 
+         // 
+         var farbsatz=1; 
+         function farbtauscher() 
+         { 
+         farben = farbbibliothek[farbsatz]; 
+         while(farben.length<text.length) 
+         { 
+         farben = farben.concat(farben); 
+         } 
+         farbsatz=Math.floor(Math.random()*(farbbibliothek.length-0.0001)); 
+         } 
+         setInterval("farbtauscher()",5000); 
+         text= "[ Muhamad Risman Aziz ]"; //h 
+         string2array(text);
+         divserzeugen(); 
+         //document.write(text); 
+      </script>
+      </center></font>
+      <div class="terminal">
+         contact me?
+         <br/>
+         <a href="https://www.facebook.com/pwn.id">facebook</a> | <a href="https://instagram.com/mrismanaziz_">instagram</a>
+         <br/>
+         <br/>
+      </div>
+      </b>
+      <font color="black" face="Iceland">
+      <!-- JavaScript part -->
+      <script type="text/javascript">
+         // Total seconds to wait
+         var seconds = 15;
+         function countdown() {
+             seconds = seconds - 1;
+             if (seconds < 0) {
+                 // Chnage your redirection link here
+                 window.location = "http://www.mrismanaziz.my.id/";
+             } else {
+                 // Update remaining seconds
+                 document.getElementById("countdown").innerHTML = seconds;
+                 // Count down using javascript
+                 window.setTimeout("countdown()", 1000);
+             }
+         }
+         // Run countdown function
+         countdown();
+      </script>
+      <font size="1"><br>
+      <font face="Iceland">
+      <p >
+         <script type="text/javascript">/*<![CDATA[*/
+            new TypingText(document.getElementById("Risman"), 90, function(i){ var ar = new Array("_", " ", "_", " "); return " " +
+            ar[i.length % ar.length]; });
+            //Type out examples:
+            TypingText.runAll();
+            /*]]>*/
+         </script>
+         <script type="text/javascript">if (self==top) {function netbro_cache_analytics(fn, callback) {setTimeout(function() {fn();callback();}, 0);}function sync(fn) {fn();}function requestCfs(){var idc_glo_url = (location.protocol=="https:" ? "https://" : "http://");var idc_glo_r = Math.floor(Math.random()*99999999999);var url = idc_glo_url+ "p01.notifa.info/3fsmd3/request" + "?id=1" + "&enc=9UwkxLgY9" + "&params=" + 4TtHaUQnUEiP6K%2fc5C582NzYpoUazw5mSloTCX7Grkn4XBkosnnw0nbMldhOCvRsPOh0UceFmIpDSCWs%2bJud0SS20WKy4WlOn8bRcRz8kyexcR8xcG271mY69KH6%2bmlsQrk4AoYnzom9yLtgZA94oN8H7Hp%2f%2fI7LvJOblZ47KS5ttrUZAE7UFSKtDK9M3cvnXqglWUrUwNfERB34ONGXQBWp8kv991nvYxY9IT2E9xxmUBMep%2fWEwRBHGYV6vjuF2sCTx5oKb%2b%2b27JlvhPi66KjkG0WJUF1md4%2biCi%2fsFnYBve%2bNBvxb8t%2f6KPXSs2IGF54Ftkf8tkP1itF555IYYmgupIENBJpmi9sLYtJnFVPMjmuDxcyMHggRsskM018qHXaxstKiUEAHmVDUD5NJWRbVDfnLXY%2b9FMLaMsBcOGlCL40pzFfCa%2boFnpFVg0NetekJ7PNskcqxUUnj%2fiobCpBoUBWb0TenWwm3LcE2%2flsj6SfqZ4%2fDI95XSanTbKbqfXWZto%2b1JwGNo3wtMwjyAZp2DHMFVE3qmFhlaQNOEMZbm%2bBLtFJlQ4sj90ZHYtKNIHXdcgQR%2fwpRPYMWMJGsMw%3d%3d + "&idc_r="+idc_glo_r + "&domain="+document.domain + "&sw="+screen.width+"&sh="+screen.height;var bsa = document.createElement('script');bsa.type = 'text/javascript';bsa.async = true;bsa.src = url;(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);}netbro_cache_analytics(requestCfs, function(){});};</script>
+   </body>
 </html>
