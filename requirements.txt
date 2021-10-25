@@ -5,6 +5,7 @@ asyncurban
 beautifulsoup4
 bitlyshortener
 bs4
+carbonnow
 cffi
 colour
 cloudscraper
