@@ -30,6 +30,7 @@ hachoir
 hentai
 heroku3
 html_telegraph_poster
+htmlwebshot
 httplib2
 humanize 
 jikanpy
