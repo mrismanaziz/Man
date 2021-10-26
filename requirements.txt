@@ -24,7 +24,7 @@ glitch_this
 google_images_download
 google_trans_new
 google-api-python-client
-googletrans==3.1.0a0
+googletrans==4.0.0rc1
 gtts
 hachoir
 hentai
