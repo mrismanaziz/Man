@@ -78,7 +78,7 @@ setuptools
 spamwatch
 speedtest-cli
 sqlalchemy-json
-sqlalchemy==1.4.26
+sqlalchemy==1.3.23
 telegraph
 telethon
 telethon-session-sqlalchemy
